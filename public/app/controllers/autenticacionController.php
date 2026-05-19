@@ -1,8 +1,8 @@
 <?php
 // app/controllers/autenticacionController.php
 
-// 
-require_once '../app/models/usuario.php';
+// Cargamos el modelo de usuario de forma dinámica usando __DIR__
+require_once __DIR__ . '/../models/usuario.php';
 
 class autenticacionController
 {
@@ -10,7 +10,7 @@ class autenticacionController
     // 1. Muestra el formulario (GET)
     public function mostrarRegistro()
     {
-        require_once '../app/views/registroVista.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/registroVista.php';
     }
 
     // 2. Procesa los datos del formulario (POST)
@@ -28,10 +28,9 @@ class autenticacionController
             // Verificamos si el usuario o email ya existen
             if (usuario::existe($email, $username)) {
                 $error = "El usuario o el email ya están registrados.";
-                // 
-                require_once '../app/views/registroVista.php';
+                require_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/registroVista.php';
             } else {
-                // 
+                
                 $creado = usuario::crear($username, $email, $password_hash);
 
                 if ($creado) {
@@ -40,20 +39,20 @@ class autenticacionController
                     exit;
                 } else {
                     $error = "Hubo un error al crear la cuenta. Inténtalo más tarde.";
-                    require_once '../app/views/registroVista.php';
+                    require_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/registroVista.php';
                 }
             }
         } catch (PDOException $e) {
             // para capturar los errores
             $error = "Error técnico: " . $e->getMessage();
-            require_once '../app/views/registroVista.php';
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/registroVista.php';
         }
     }
 
     // 3. Muestra el formulario de Login (GET)
     public function mostrarLogin()
     {
-        require_once '../app/views/loginVista.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/loginVista.php';
     }
 
     // 4. Procesa el inicio de sesión (POST)
@@ -91,7 +90,7 @@ class autenticacionController
         } else {
             // Si falla, creamos el mensaje de error para la vista
             $error = "El usuario o la contraseña son incorrectos.";
-            require_once '../app/views/loginVista.php';
+            require_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/loginVista.php';
         }
     }
 
