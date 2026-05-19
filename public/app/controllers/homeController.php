@@ -79,8 +79,7 @@ class homeController {
             $samples = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        // 9. Llamamos a la vista pasándole el control de lo que se va a renderizar
-        //require_once '../app/views/homeVista.php';
+        // 9. Llamamos a la vista usando la constante absoluta dinámica
         require_once __DIR__ . '/../views/homeVista.php';
     }
 
@@ -111,8 +110,8 @@ class homeController {
         $stmtSamples->execute(['id_album' => $id_album]);
         $samples = $stmtSamples->fetchAll(PDO::FETCH_ASSOC);
 
-        // 4. Cargamos la vista
-        require_once '../app/views/libreriaVista.php';
+        // 4. CORREGIDO: Cargamos la vista de librería de forma dinámica absoluta
+        require_once __DIR__ . '/../views/libreriaVista.php';
     }
 
     public function descargarSample() {
@@ -164,8 +163,15 @@ class homeController {
             die("Error al procesar la transacción.");
         }
 
-        // 6. FORZAR DESCARGA DEL ARCHIVO REAL
-        $rutaFisicaArchivo = $_SERVER['DOCUMENT_ROOT'] . '/' . $sample['archivo_url'];
+        // 6. MEJORADO: Forzar la descarga buscando el archivo relativo de forma segura en la raíz de ejecución
+        // Quitamos barras iniciales extras para evitar concatenaciones inválidas en Linux
+        $rutaLimpia = ltrim($sample['archivo_url'], '/');
+        $rutaFisicaArchivo = __DIR__ . '/../../../' . $rutaLimpia;
+
+        // Si no se encuentra saliendo tres niveles desde controllers, probamos con la raíz relativa de la app pública
+        if (!file_exists($rutaFisicaArchivo)) {
+            $rutaFisicaArchivo = $_SERVER['DOCUMENT_ROOT'] . '/' . $sample['archivo_url'];
+        }
 
         if (file_exists($rutaFisicaArchivo)) {
             header('Content-Description: File Transfer');
