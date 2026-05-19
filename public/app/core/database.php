@@ -13,7 +13,7 @@ class Database {
             $port    = '32462';                     // El puerto aleatorio que te dio Railway
             $db      = 'railway';                   // El nombre real de la base de datos en Railway
             $user    = 'root';                      // El usuario por defecto
-            $pass    = 'afadadgadgadgadgadg';       // Tu contraseña real de la nube
+            $pass    = 'QipfANvegHFOFnWFGGujmElEnioMsUaN';       // Tu contraseña real de la nube
             $charset = 'utf8mb4';
 
             // configuración de PDO
