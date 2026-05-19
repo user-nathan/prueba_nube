@@ -19,7 +19,8 @@
             
             <?php if (isset($_SESSION['usuario_nombre'])): ?>
                 <?php 
-                    require_once '../app/models/usuario.php';
+                    // CORREGIDO: Ruta absoluta usando el DOCUMENT_ROOT del servidor web
+                    require_once $_SERVER['DOCUMENT_ROOT'] . '/app/models/usuario.php';
                     $datosHeader = usuario::obtenerPorId($_SESSION['usuario_id']);
                 ?>
                 
