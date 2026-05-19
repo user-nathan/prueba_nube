@@ -80,7 +80,8 @@ class homeController {
         }
 
         // 9. Llamamos a la vista pasándole el control de lo que se va a renderizar
-        require_once '../app/views/homeVista.php';
+        //require_once '../app/views/homeVista.php';
+        require_once __DIR__ . '/../views/homeVista.php';
     }
 
 
