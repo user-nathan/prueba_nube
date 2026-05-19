@@ -1,7 +1,8 @@
 <?php
 // app/controllers/usuarioController.php
 
-require_once '../app/models/usuario.php';
+// CORREGIDO: Ruta dinámica para cargar el modelo de usuario usando __DIR__
+require_once __DIR__ . '/../models/usuario.php';
 
 class usuarioController {
     
@@ -20,8 +21,8 @@ class usuarioController {
         // 3. Como ya sabemos su ID por la sesión, le pedimos al modelo los datos completos de la BD
         $datosUsuario = usuario::obtenerPorId($_SESSION['usuario_id']);
 
-        // 4. Cargamos la vista pasándole los datos del usuario
-        require_once '../app/views/perfilVista.php';
+        // 4. CORREGIDO: Cargamos la vista de forma absoluta usando el DOCUMENT_ROOT del servidor web
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/perfilVista.php';
     }
 
     public function actualizarPerfil() {
