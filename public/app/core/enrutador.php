@@ -22,14 +22,17 @@ class Enrutador {
         if (isset($this->rutas[$metodo][$url])) {
             list($controlador, $metodoAccion) = explode('@', $this->rutas[$metodo][$url]);
 
-            // Busca el archivo respetando las mayúsculas
-            if (file_exists("../app/controllers/$controlador.php")) {
-                require_once "../app/controllers/$controlador.php";
+            // Creamos la ruta dinámica real basada en la ubicación de este archivo core/ en el servidor
+            $rutaControlador = __DIR__ . "/../controllers/$controlador.php";
+
+            // Busca el archivo respetando las mayúsculas usando la ruta absoluta corregida
+            if (file_exists($rutaControlador)) {
+                require_once $rutaControlador;
                 $instanciaControlador = new $controlador();
                 $instanciaControlador->$metodoAccion();
             } else {
                 http_response_code(500);
-                echo "Error Interno: El archivo '../app/controllers/$controlador.php' no existe.";
+                echo "Error Interno: El archivo '$rutaControlador' no existe.";
             }
         } else {
             http_response_code(404);
