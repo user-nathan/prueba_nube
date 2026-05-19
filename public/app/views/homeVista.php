@@ -2,7 +2,8 @@
 // app/views/homeVista.php
 
 // Inyectamos la cabecera global el menú y los estilos
-require_once '../app/views/includes/header.php'; 
+//require_once '../app/views/includes/header.php'; 
+require_once __DIR__ . '/includes/header.php';
 
 // REVISIÓN DE FILTROS: Evaluamos si el usuario ha enviado alguna búsqueda
 $busquedaActiva = !empty($_GET['categoria']) || !empty($_GET['genero']) || !empty($_GET['bpm']) || !empty($_GET['tono']);
@@ -126,5 +127,6 @@ $busquedaActiva = !empty($_GET['categoria']) || !empty($_GET['genero']) || !empt
 
 <?php 
 // Inyectamos el cierre estructural de la página
-require_once '../app/views/includes/footer.php'; 
+//require_once '../app/views/includes/footer.php'; 
+require_once __DIR__ . '/includes/footer.php';
 ?>
