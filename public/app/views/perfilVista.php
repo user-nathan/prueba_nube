@@ -1,9 +1,9 @@
 <?php 
 // app/views/perfilVista.php
 
-//
 $cssEspecifico = 'perfil.css'; 
-require_once '../app/views/includes/header.php'; 
+// CORREGIDO: Ruta absoluta usando el DOCUMENT_ROOT del servidor web
+require_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/includes/header.php'; 
 ?>
 
 <div class="wrapper-perfil">
@@ -86,6 +86,6 @@ require_once '../app/views/includes/header.php';
 
 <script src="/assets/js/perfil.js"></script>
 <?php 
-//Inyectamos el pie de página global
-require_once '../app/views/includes/footer.php'; 
+// CORREGIDO: Inyectamos el pie de página global de forma segura
+require_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/includes/footer.php'; 
 ?>
