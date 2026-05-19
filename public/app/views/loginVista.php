@@ -2,11 +2,9 @@
 // app/views/loginVista.php
 
 $cssEspecifico = 'login.css'; // <--- ¡Le decimos al header qué CSS se cargue antes de que pinte la página!
-require_once '../app/views/includes/header.php'; 
+// CORREGIDO: Ruta absoluta usando el DOCUMENT_ROOT del servidor
+require_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/includes/header.php'; 
 ?>
-
-<!-- <link rel="stylesheet" href="/assets/css/login.css"> -->
-
 
 <div style="text-align: center; padding: 20px;">
 
@@ -33,6 +31,6 @@ require_once '../app/views/includes/header.php';
 </div>
 
 <?php 
-//Inyectamos el cierre estructural de la página
-require_once '../app/views/includes/footer.php'; 
+// CORREGIDO: Inyectamos el cierre estructural de la página de forma segura
+require_once $_SERVER['DOCUMENT_ROOT'] . '/app/views/includes/footer.php'; 
 ?>
