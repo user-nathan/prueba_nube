@@ -8,11 +8,12 @@ class Database {
         // si ya existe la conexión, no la duplica
         if (self::$connection === null) {
             
-            // CONFIGURACIÓN DE CONEXIÓN
-            $host    = 'localhost';
-            $db      = 'samples_tienda'; // Tu base de datos
-            $user    = 'root';        // Tu usuario de MySQL
-            $pass    = 'jonathan'; // <-- Pon aquí tu contraseña real
+            // CONFIGURACIÓN DE CONEXIÓN CORREGIDA PARA RAILWAY
+            $host    = 'centerbeam.proxy.rlwy.net'; // Servidor externo de Railway
+            $port    = '32462';                     // El puerto aleatorio que te dio Railway
+            $db      = 'railway';                   // El nombre real de la base de datos en Railway
+            $user    = 'root';                      // El usuario por defecto
+            $pass    = 'afadadgadgadgadgadg';       // Tu contraseña real de la nube
             $charset = 'utf8mb4';
 
             // configuración de PDO
@@ -22,7 +23,8 @@ class Database {
                 PDO::ATTR_EMULATE_PREPARES   => false,                  
             ];
 
-            $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+            // Añadimos obligatoriamente el ";port=" a la cadena DSN para que conecte por el puerto correcto
+            $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
 
             try {
                 // Creamos la conexión y la guardamos 
